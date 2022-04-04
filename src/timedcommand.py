@@ -20,3 +20,6 @@ class TimedCommand:
 
     def get_right_motor(self):
         return self.right_motor
+
+    def __str__(self):
+        return f"left motor: {self.left_motor} right motor: {self.right_motor} start time: {self.start_time} end time: {self.end_time}"
