@@ -5,9 +5,11 @@ from one trajectory to another. Use the following constants in making your plan.
 
 ```
 TRACK_RADIUS = .15 # The track radius is 15 cm
-WHEEL_RADIUS = .05 # The wheel radius on your tank drive is 5 cm
+WHEEL_RADIUS = .08 # The wheel radius on your tank drive is 5 cm
 MAX_ROTATIONS = 10 # The maximum number of rotations your wheels can do is 200 rev per second
-
+SPEED = .2 # The precentage of the max speed we will go so that we don't go too fast and over shoot.
+START_POSE = Pose2D(4, 2, 0) # A typical start pose
+END_POSE = Pose2D(5, 1, 1) # A typical end pose
  ```
 
 Your task is to create a ```TrajectoryGenerator``` class. This class will have a method called ```generate``` that will
