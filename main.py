@@ -11,12 +11,12 @@ from src.timedcommand import TimedCommand
 from src.trajectory import Trajectory
 from src.trajectorygenerator import TrajectoryGenerator
 
-TRACK_RADIUS = .30  # The track radius is 14 cm
-WHEEL_RADIUS = .05  # The wheel radius on your tank drive is 8 cm
+TRACK_RADIUS = .15  # The track radius is 14 cm
+WHEEL_RADIUS = .08  # The wheel radius on your tank drive is 8 cm
 MAX_ROTATIONS = 10  # The maximum number of rotations your wheels can do is 200 rev per second
 START_POSE = Pose2D(4, 2, 0)
 END_POSE = Pose2D(5, 1, 1)
-SPEED = .1
+SPEED = .2
 
 
 class MyTrajectoryGenerator(TrajectoryGenerator):
@@ -45,19 +45,17 @@ class MyTrajectoryGenerator(TrajectoryGenerator):
         return trajectory
 
     def point_turn_command(self, robot, delta_theta, speed, start_time) -> TimedCommand:
-        time_turn_one = math.fabs(delta_theta / (robot.max_turn_speed() * speed))
+        time_turn_one = math.fabs(delta_theta / (robot.get_max_angular_speed() * speed))
         speed_one = math.copysign(speed, delta_theta)
         return TimedCommand(-1 * speed_one, speed_one, start_time, start_time + time_turn_one)
 
     def move_straight_command(self, robot, distance, speed, start_time) -> TimedCommand:
-        time = distance / (speed * robot.max_wheel_speed())
+        time = distance / (speed * robot.get_max_linear_speed())
         return TimedCommand(speed, speed, start_time, start_time + time)
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
     my_robot = TankRobot(TRACK_RADIUS, WHEEL_RADIUS, MAX_ROTATIONS, START_POSE)
-    print("Linear max speed: " + str(my_robot.max_wheel_speed()))
-    print("Max Angular sped: " + str(my_robot.max_turn_speed()))
     trajectory_generator = MyTrajectoryGenerator()
 
     trajectory = trajectory_generator.generate(my_robot, END_POSE, SPEED)

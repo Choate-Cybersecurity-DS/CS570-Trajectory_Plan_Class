@@ -4,23 +4,13 @@ In this task, you will be given two poses, and need to find a series of settings
 from one trajectory to another. Use the following constants in making your plan.
 
 ```
-TRACK_RADIUS = .15 # The track radius is 14 cm
-WHEEL_RADIUS = .05 # The wheel radius on your tank drive is 8 cm
-MAX_ROTATIONS = 60 # The maximum number of rotations your wheels can do is 200 rev per second
+TRACK_RADIUS = .15 # The track radius is 15 cm
+WHEEL_RADIUS = .05 # The wheel radius on your tank drive is 5 cm
+MAX_ROTATIONS = 10 # The maximum number of rotations your wheels can do is 200 rev per second
+
  ```
 
-There is a ```Pose2D``` class that we use to record different poses. The code for Pose2D is:
-
-```commandline
-class Pose2D:
-
-    def __init__(self, x, y, theta):
-        self.x=x
-        self.y=y
-        self.theta=theta
-```
-
-Your task is to create a ```TrajetoryGenerator``` class. This class will have a method called ```generate``` that will
+Your task is to create a ```TrajectoryGenerator``` class. This class will have a method called ```generate``` that will
 take a start pose and an end pose, and create a list ```RobotSettings``` that will guide a robot from the starting pose
 to the end pose.
 
@@ -34,7 +24,7 @@ class, ```Trajectory Generator``` (though it may be helpful to write some helper
 The ```Pose``` class is a data class this is simply to keep track of the x, y, and theta.
 
 ```
-class Pose2D:
+class: Pose2D:
 
     def __init__(self, x, y, theta):
  
@@ -59,17 +49,13 @@ class TankRobot:
 To create a ```Robot``` you need to put in a drive radius, a wheel radius, revolutions per second and a ```Pose```.
 
 ```
-    def max_wheel_speed(self) -> float:
-```
-
-```
-max_wheel_speed()
+    def get_max_linear_speed()
 ``` 
 
 give the maximum forward velocity you can get with the robot.
 
 ```
-    def max_turn_speed(self) -> float:      
+    def get_max_angular_speed(self) -> float:      
 ```
 
 This method gives the maximum angular velocity.
@@ -153,7 +139,7 @@ A ```Trajectory``` is a list of ```TimedCommand``` objects. Use the append metho
     def append(self, my_command: TimedCommand) -> None:
 ```
 
-### class RobotRunner
+### class: RobotRunner
 
 ```RobotRunner``` is a class that runs a robot through a ```Trajectory``` and reports out the various poses that it goes
 through. It keeps track of time, and starts at time equals 0 and increases the time by 0.02 seconds.
@@ -190,7 +176,7 @@ Print out where the ```Robot``` is at this time.
 
 Run the ```Robot``` through the ```Trajectory``` updating after each time step (0.02 seconds)
 
-### class TrajectoryGenerator
+### class: TrajectoryGenerator
 
 A ```TrajectoryGenerator``` has no initializer. It's only method is generate. This method takes 2 ```Pose``` objects and
 returns a ```Trajectory``` that moves from one to the other.

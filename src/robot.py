@@ -14,11 +14,11 @@ class Robot:
         self.right_motor_setting = 0
         self.pose = pose
 
-    def max_wheel_speed(self) -> float:
+    def get_max_linear_speed(self) -> float:
         return self.revs_per_sec * self.wheel_radius * 2 * math.pi
 
-    def max_turn_speed(self) -> float:
-        return self.max_wheel_speed() / self.drive_radius
+    def get_max_angular_speed(self) -> float:
+        return self.get_max_linear_speed() / self.drive_radius
 
     def set_position(self, pose: Pose2D) -> None:
         self.pose = pose
